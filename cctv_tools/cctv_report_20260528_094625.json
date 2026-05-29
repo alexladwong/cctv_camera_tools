@@ -1,0 +1,185 @@
+{
+  "devices": [
+    {
+      "ip": "192.168.1.1",
+      "port": 80,
+      "model": "Unknown",
+      "firmware": "Unknown",
+      "manufacturer": "Unknown",
+      "credentials_found": [
+        [
+          "admin",
+          "12345"
+        ]
+      ],
+      "vulnerabilities": [],
+      "open_ports": [
+        80
+      ],
+      "rtsp_url": "",
+      "http_url": "http://192.168.1.1:80",
+      "physical_location": "Hallway",
+      "blind_spots": [
+        "Corners of the room may be outside field of view",
+        "Directly below camera (if ceiling mounted)",
+        "Areas behind large obstacles"
+      ],
+      "stream_accessible": false
+    },
+    {
+      "ip": "192.168.1.12",
+      "port": 80,
+      "model": "Unknown",
+      "firmware": "Unknown",
+      "manufacturer": "Unknown",
+      "credentials_found": [],
+      "vulnerabilities": [],
+      "open_ports": [],
+      "rtsp_url": "",
+      "http_url": "",
+      "physical_location": "Parking Lot",
+      "blind_spots": [
+        "Corners of the room may be outside field of view",
+        "Directly below camera (if ceiling mounted)",
+        "Areas behind large obstacles"
+      ],
+      "stream_accessible": false
+    },
+    {
+      "ip": "192.168.1.22",
+      "port": 80,
+      "model": "Unknown",
+      "firmware": "Unknown",
+      "manufacturer": "Unknown",
+      "credentials_found": [],
+      "vulnerabilities": [],
+      "open_ports": [],
+      "rtsp_url": "",
+      "http_url": "",
+      "physical_location": "Main Entrance",
+      "blind_spots": [
+        "Corners of the room may be outside field of view",
+        "Directly below camera (if ceiling mounted)",
+        "Areas behind large obstacles"
+      ],
+      "stream_accessible": false
+    },
+    {
+      "ip": "192.168.1.72",
+      "port": 80,
+      "model": "Unknown",
+      "firmware": "Unknown",
+      "manufacturer": "Unknown",
+      "credentials_found": [],
+      "vulnerabilities": [],
+      "open_ports": [],
+      "rtsp_url": "",
+      "http_url": "",
+      "physical_location": "Entrance",
+      "blind_spots": [
+        "Corners of the room may be outside field of view",
+        "Directly below camera (if ceiling mounted)",
+        "Areas behind large obstacles"
+      ],
+      "stream_accessible": false
+    },
+    {
+      "ip": "192.168.1.123",
+      "port": 80,
+      "model": "Unknown",
+      "firmware": "Unknown",
+      "manufacturer": "Unknown",
+      "credentials_found": [],
+      "vulnerabilities": [],
+      "open_ports": [],
+      "rtsp_url": "",
+      "http_url": "",
+      "physical_location": "Server Room",
+      "blind_spots": [
+        "Corners of the room may be outside field of view",
+        "Directly below camera (if ceiling mounted)",
+        "Areas behind large obstacles"
+      ],
+      "stream_accessible": false
+    },
+    {
+      "ip": "192.168.1.150",
+      "port": 80,
+      "model": "Unknown",
+      "firmware": "Unknown",
+      "manufacturer": "Unknown",
+      "credentials_found": [],
+      "vulnerabilities": [],
+      "open_ports": [],
+      "rtsp_url": "",
+      "http_url": "",
+      "physical_location": "Main Entrance",
+      "blind_spots": [
+        "Corners of the room may be outside field of view",
+        "Directly below camera (if ceiling mounted)",
+        "Areas behind large obstacles"
+      ],
+      "stream_accessible": false
+    }
+  ],
+  "findings": [
+    {
+      "title": "Default Credentials Found on 192.168.1.1",
+      "severity": "CRITICAL",
+      "description": "Device accessible with default credentials: admin:12345",
+      "remediation": "Change all default passwords immediately and implement strong password policy",
+      "cve_id": "",
+      "device_ip": "192.168.1.1"
+    },
+    {
+      "title": "Camera Placement Analysis - Hallway",
+      "severity": "INFO",
+      "description": "Camera at 192.168.1.1 located in Hallway. Potential blind spots: Corners of the room may be outside field of view, Directly below camera (if ceiling mounted)",
+      "remediation": "Conduct physical security audit to verify coverage and eliminate blind spots",
+      "cve_id": "",
+      "device_ip": "192.168.1.1"
+    },
+    {
+      "title": "Camera Placement Analysis - Parking Lot",
+      "severity": "INFO",
+      "description": "Camera at 192.168.1.12 located in Parking Lot. Potential blind spots: Corners of the room may be outside field of view, Directly below camera (if ceiling mounted)",
+      "remediation": "Conduct physical security audit to verify coverage and eliminate blind spots",
+      "cve_id": "",
+      "device_ip": "192.168.1.12"
+    },
+    {
+      "title": "Camera Placement Analysis - Main Entrance",
+      "severity": "INFO",
+      "description": "Camera at 192.168.1.22 located in Main Entrance. Potential blind spots: Corners of the room may be outside field of view, Directly below camera (if ceiling mounted)",
+      "remediation": "Conduct physical security audit to verify coverage and eliminate blind spots",
+      "cve_id": "",
+      "device_ip": "192.168.1.22"
+    },
+    {
+      "title": "Camera Placement Analysis - Entrance",
+      "severity": "INFO",
+      "description": "Camera at 192.168.1.72 located in Entrance. Potential blind spots: Corners of the room may be outside field of view, Directly below camera (if ceiling mounted)",
+      "remediation": "Conduct physical security audit to verify coverage and eliminate blind spots",
+      "cve_id": "",
+      "device_ip": "192.168.1.72"
+    },
+    {
+      "title": "Camera Placement Analysis - Server Room",
+      "severity": "INFO",
+      "description": "Camera at 192.168.1.123 located in Server Room. Potential blind spots: Corners of the room may be outside field of view, Directly below camera (if ceiling mounted)",
+      "remediation": "Conduct physical security audit to verify coverage and eliminate blind spots",
+      "cve_id": "",
+      "device_ip": "192.168.1.123"
+    },
+    {
+      "title": "Camera Placement Analysis - Main Entrance",
+      "severity": "INFO",
+      "description": "Camera at 192.168.1.150 located in Main Entrance. Potential blind spots: Corners of the room may be outside field of view, Directly below camera (if ceiling mounted)",
+      "remediation": "Conduct physical security audit to verify coverage and eliminate blind spots",
+      "cve_id": "",
+      "device_ip": "192.168.1.150"
+    }
+  ],
+  "timestamp": "2026-05-28T09:46:25.781268",
+  "target": "192.168.1.0/24"
+}

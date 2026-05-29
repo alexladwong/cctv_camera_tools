@@ -1,0 +1,34 @@
+{
+  "title": "CCTV Security Assessment Report",
+  "target_network": "192.168.1.0/24",
+  "scan_timestamp": "2026-05-28T09:37:28.679159",
+  "devices_found": 1,
+  "critical_vulnerabilities": 1,
+  "high_vulnerabilities": 0,
+  "medium_vulnerabilities": 0,
+  "low_vulnerabilities": 0,
+  "devices": [
+    {
+      "ip": "192.168.1.1",
+      "model": "Unknown",
+      "firmware": "Unknown",
+      "open_ports": [
+        80
+      ],
+      "vulnerabilities": [
+        {
+          "name": "Default Credentials",
+          "severity": "CRITICAL",
+          "description": "Default credentials found: [{'url': 'http://192.168.1.1:80', 'username': 'admin', 'password': ''}, {'url': 'http://192.168.1.1:80', 'username': 'admin', 'password': 'admin'}, {'url': 'http://192.168.1.1:80', 'username': 'admin', 'password': '123456'}, {'url': 'http://192.168.1.1:80', 'username': 'admin', 'password': 'password'}, {'url': 'http://192.168.1.1:80', 'username': 'admin', 'password': '12345'}, {'url': 'http://192.168.1.1:80', 'username': 'root', 'password': 'root'}, {'url': 'http://192.168.1.1:80', 'username': 'root', 'password': ''}, {'url': 'http://192.168.1.1:80', 'username': 'user', 'password': 'user'}, {'url': 'http://192.168.1.1:80', 'username': 'admin', 'password': '888888'}, {'url': 'http://192.168.1.1:80', 'username': 'admin', 'password': '666666'}, {'url': 'http://192.168.1.1:80', 'username': 'admin', 'password': '111111'}, {'url': 'http://192.168.1.1:80', 'username': 'administrator', 'password': 'password'}, {'url': 'http://192.168.1.1:80', 'username': 'guest', 'password': 'guest'}, {'url': 'http://192.168.1.1:80', 'username': 'default', 'password': 'default'}, {'url': 'http://192.168.1.1:80', 'username': 'admin', 'password': '1234'}, {'url': 'http://192.168.1.1:80', 'username': 'admin', 'password': 'admin123'}, {'url': 'http://192.168.1.1:80', 'username': 'Admin', 'password': 'Admin'}, {'url': 'http://192.168.1.1:80', 'username': 'supervisor', 'password': 'supervisor'}, {'url': 'http://192.168.1.1:80', 'username': 'service', 'password': 'service'}]",
+          "remediation": "Change all default passwords immediately",
+          "cve_id": null
+        }
+      ]
+    }
+  ],
+  "recommendations": [
+    "\ud83d\udd34 IMMEDIATE ACTION: Change all default credentials on critical devices",
+    "\ud83d\udccb Review access logs for unauthorized access attempts",
+    "\ud83d\udd12 Enable HTTPS and disable HTTP if possible"
+  ]
+}
