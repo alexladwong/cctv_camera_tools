@@ -1,1191 +1,650 @@
 📹 CCTV Security Assessment Suite
 
-Professional CCTV Network Discovery, Security Auditing & Assessment Toolkit
+CCTV Network Discovery, Security Auditing & Assessment Toolkit
 
-"Python" (https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
-"Platform" (https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey)
-"Security" (https://img.shields.io/badge/Focus-CCTV%20%26%20Network%20Security-0A7D91)
-"Interface" (https://img.shields.io/badge/Interface-CLI%20%7C%20PyQt6-41B883)
-"Status" (https://img.shields.io/badge/Project-Development-orange)
-"License" (https://img.shields.io/badge/License-MIT-blue)
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Interface-CLI%20%7C%20PyQt6-41B883" alt="CLI and PyQt6">
+  <img src="https://img.shields.io/badge/Focus-CCTV%20%26%20Network%20Security-0A7D91" alt="CCTV and Network Security">
+  <img src="https://img.shields.io/badge/Platform-Kali%20Linux-557C94" alt="Kali Linux">
+  <img src="https://img.shields.io/badge/License-Verify%20Repository%20License-lightgrey" alt="License">
+</p>---
 
-CCTV Security Assessment Suite is a Python-based cybersecurity project designed to help security professionals, network administrators, and authorized penetration testers inventory CCTV devices, assess network exposure, document security weaknesses, and generate actionable security reports.
+📌 Overview
 
-The project combines command-line assessment capabilities with a graphical desktop application, providing a foundation for structured CCTV security assessments in authorized laboratory and enterprise environments.
+CCTV Security Assessment Suite is a Python-based toolkit for authorized CCTV network discovery, security assessment, camera diagnostics, and security report generation.
 
-«Project status: The documentation describes the intended architecture and example workflows. Actual capabilities depend on the implementation of the Python scripts. Features should not be considered implemented or verified until they have been tested.»
+The project combines command-line assessment capabilities with a PyQt6 graphical application and supporting camera utilities.
 
----
+It is intended for security professionals, network administrators, cybersecurity students, and authorized penetration testers who need to investigate CCTV deployments, document potential weaknesses, and support remediation.
 
-📑 Table of Contents
+Project objectives
 
-- "Overview" (#-overview)
-- "Objectives" (#-objectives)
-- "Key Features" (#-key-features)
-- "Architecture" (#-architecture)
-- "Technology Stack" (#-technology-stack)
-- "Requirements" (#-requirements)
-- "Installation" (#-installation)
-  - "Kali Linux / Debian / Ubuntu" (#1-kali-linux--debian--ubuntu)
-  - "macOS" (#2-macos)
-  - "Windows" (#3-windows)
-- "Project Structure" (#-project-structure)
-- "Command-Line Usage" (#-command-line-usage)
-- "Graphical Application" (#-graphical-application)
-- "Assessment Workflow" (#-assessment-workflow)
-- "Security Checks" (#-security-checks)
-- "Reports and Findings" (#-reports-and-findings)
-- "RTSP Stream Assessment" (#-rtsp-stream-assessment)
-- "Security Recommendations" (#-security-recommendations)
-- "Troubleshooting" (#-troubleshooting)
-- "Development and Testing" (#-development-and-testing)
-- "Roadmap" (#-roadmap)
-- "Responsible Use" (#-responsible-use)
-- "Contributing" (#-contributing)
-- "License" (#-license)
-- "Author" (#-author)
+- Discover and assess authorized CCTV network targets.
+- Organize device information and security findings.
+- Support camera-related diagnostics and stream viewing.
+- Generate and review assessment reports.
+- Provide both command-line and graphical workflows.
+- Support repeatable security assessments in controlled environments.
+
+«Authorization required: Only assess CCTV devices and networks that you own or have explicit permission to test. Network scanning, traffic interception, and camera stream access may affect device availability or expose sensitive information.»
 
 ---
 
-🔍 Overview
+✨ Features
 
-Internet-connected and locally networked CCTV systems can introduce security risks when they are deployed with default credentials, outdated firmware, unnecessary exposed services, weak network segmentation, or insecure remote-access configurations.
+1. Command-Line Assessment
 
-The CCTV Security Assessment Suite aims to help authorized users identify and document these risks through a structured assessment process.
+The CLI assessment engine accepts individual IP addresses and CIDR network ranges.
 
-The project is intended for:
+Confirmed command-line options include:
 
-- Cybersecurity students and researchers.
-- Network and systems administrators.
-- CCTV installation and maintenance professionals.
-- Security operations teams.
-- Authorized penetration testers.
-- Organizations conducting internal security audits.
-- Cybersecurity laboratory environments.
+Option| Description
+"target"| Target IP address or CIDR network
+"-h", "--help"| Display command-line help
+"-o", "--output OUTPUT"| Specify the output report file
+"-q", "--quick"| Use reduced timeouts
 
-The Problem
+Example:
 
-Poorly secured CCTV deployments can expose organizations to:
+python cctv_assessment.py --help
 
-- Unauthorized camera access.
-- Unnecessary network service exposure.
-- Weak authentication configurations.
-- Outdated firmware and unsupported devices.
-- Insecure remote administration.
-- Unencrypted management traffic.
-- Inadequate network isolation.
-- Weak monitoring and incident-response procedures.
+2. Graphical Assessment Suite
 
-The Approach
+The desktop application uses PyQt6 and contains components for:
 
-The suite provides a framework for collecting device information, evaluating security configurations, recording findings, and producing reports that support remediation.
+- CCTV device representation.
+- Security finding representation.
+- Background assessment tasks.
+- Firmware-related analysis.
+- Traffic-related functionality.
+- Live stream viewing.
+- Graphical assessment workflows.
 
-The long-term goal is to provide a unified assessment workflow through both a command-line interface and a desktop application.
+The actual availability of individual operations depends on their implementation, device compatibility, and the runtime environment.
 
----
+3. Camera Diagnostics and Viewing
 
-🎯 Objectives
+Supporting scripts provide a foundation for camera-related diagnostics and viewing workflows.
 
-The project's primary objectives are to:
+These utilities should be tested against authorized devices before being relied upon in production.
 
-1. Discover CCTV devices on explicitly authorized network ranges.
-2. Build an inventory of identified devices and their network addresses.
-3. Identify exposed services and potentially risky configurations.
-4. Assess HTTP/HTTPS management interfaces where authorized.
-5. Support documented, permission-based RTSP connectivity checks.
-6. Record findings with severity, evidence, and remediation guidance.
-7. Generate machine-readable JSON reports and human-readable HTML reports.
-8. Provide a graphical interface for reviewing devices and assessment results.
-9. Encourage secure CCTV deployment practices.
-10. Support cybersecurity education and defensive network monitoring.
+4. Assessment Reports
+
+The project includes JSON and HTML report files.
+
+These formats support structured data review and human-readable reporting. Report fields and assessment coverage should be verified against the current implementation.
 
 ---
 
-✨ Key Features
+🧰 Project Structure
 
-The following table describes the intended capabilities. Each feature must be validated against the actual implementation before being advertised as operational.
+The following files have been identified in the project directory.
 
-Feature| Description
-Network discovery| Identify responsive devices in an authorized IP range.
-Device inventory| Record IP addresses, hostnames, and available service information.
-Service assessment| Identify exposed network services and potentially unnecessary ports.
-Web interface review| Inspect accessible camera management interfaces.
-Configuration review| Document relevant security configuration weaknesses.
-RTSP assessment| Check authorized RTSP connectivity and stream availability.
-JSON reporting| Export structured assessment results.
-HTML reporting| Present findings in a browser-friendly format, if implemented.
-Graphical interface| Review assessment results through a PyQt6 desktop application.
-Risk classification| Categorize findings by severity when supported by the assessment engine.
-Remediation guidance| Provide recommendations for addressing documented weaknesses.
+cctv_tools/
+├── README.md
+├── README.txt
+│
+├── cctv_assessment.py
+├── cctv_assessment_suite.py
+│
+├── diagnose_camera.py
+├── enhanced_cctv_viewer.py
+│
+├── test_camera_http.py
+├── test_camera_htt.py
+│
+├── cctv_assessment_report.html
+├── cctv_assessment_report.json
+├── cctv_report_20260528_094625.json
+│
+├── office_cctv_report.html
+├── office_cctv_report.json
+│
+└── .venv/
 
-Security-First Design
+The ".venv/" directory is created during local installation and should generally be excluded from version control.
 
-The intended design emphasizes:
+Main components
 
-- Explicitly authorized targets.
-- Non-destructive assessment methods.
-- Read-only inspection wherever possible.
-- Rate-limited network activity.
-- No default-credential spraying.
-- No indiscriminate Internet-wide scanning.
-- No automatic exploitation.
-- No unauthorized recording or storage of camera footage.
-- Clear reporting of evidence and assessment limitations.
+File| Purpose
+"cctv_assessment.py"| Command-line assessment framework
+"cctv_assessment_suite.py"| PyQt6 graphical assessment application
+"diagnose_camera.py"| Camera diagnostic utility
+"enhanced_cctv_viewer.py"| Enhanced camera viewing utility
+"test_camera_http.py"| HTTP-related camera testing utility
+"test_camera_htt.py"| Additional HTTP-related utility; verify its intended purpose
 
----
-
-🏗️ Architecture
-
-The suite is organized around two primary entry points.
-
-1. Command-Line Assessment Engine
-
-Entry point: "cctv_assessment.py"
-
-Intended responsibilities:
-
-- Accept an authorized IP address or CIDR network range.
-- Perform supported network discovery.
-- Collect available device and service information.
-- Apply implemented security checks.
-- Aggregate findings.
-- Export assessment results.
-
-2. Graphical Desktop Application
-
-Entry point: "cctv_assessment_suite.py"
-
-Intended responsibilities:
-
-- Provide a graphical interface using PyQt6.
-- Present discovered devices and assessment results.
-- Display findings and remediation recommendations.
-- Support report review and export.
-- Integrate authorized RTSP viewing if implemented.
-
-High-Level Architecture
-
-              CCTV SECURITY ASSESSMENT SUITE
-                           |
-                +----------+----------+
-                |                     |
-          CLI Assessment        Desktop GUI
-          cctv_assessment.py    cctv_assessment_suite.py
-                |                     |
-                +----------+----------+
-                           |
-                   Assessment Engine
-                           |
-              +------------+------------+
-              |            |            |
-          Discovery     Service      Security
-                         Review       Checks
-              |            |            |
-              +------------+------------+
-                           |
-                    Findings Engine
-                           |
-                 +---------+---------+
-                 |                   |
-              JSON Export         HTML Export
-                 |                   |
-                 +---------+---------+
-                           |
-                  Security Remediation
-
-This diagram represents the intended architecture, not a verified description of the existing codebase.
-
----
-
-🛠️ Technology Stack
-
-Technology| Purpose
-Python 3.10+| Core application language
-Requests| HTTP/HTTPS requests
-ipaddress| IP address and CIDR network parsing
-PyQt6| Desktop graphical interface
-OpenCV| Camera stream processing and display, where implemented
-NumPy| Image and numerical processing
-Scapy| Authorized packet-level network assessment
-FFmpeg| Optional media and stream processing
-JSON| Structured report output
-HTML/CSS| Browser-based report presentation
-
-Python Standard Library
-
-The "ipaddress" module is included with Python. It does not normally need to be installed separately.
+The repository also contains sample or previously generated HTML and JSON reports.
 
 ---
 
 💻 Requirements
 
-Minimum Requirements
+Recommended environment
 
-- Python 3.10 or newer.
-- Network access to the authorized assessment environment.
-- Permission to assess the target devices.
-- Sufficient privileges for any operating-system-specific packet operations.
-- A compatible graphical environment for the desktop application.
+- Python 3.10 or later, subject to compatibility testing.
+- pip.
+- A supported Linux environment for network assessment.
+- PyQt6 for the desktop application.
+- OpenCV for image and video operations.
+- NumPy for numerical and image-processing operations.
+- Requests for HTTP operations.
+- Scapy for packet and network operations.
+- A graphical desktop environment for visible PyQt6 windows.
 
-Recommended Environment
+Kali Linux is a convenient environment for authorized cybersecurity testing.
 
-For development and testing, use an isolated virtual environment with a dedicated CCTV test network.
+Other operating systems may work, but platform-specific dependencies and network permissions should be verified.
 
-Recommended platforms:
+Important Android and Kali note
 
-- Kali Linux.
-- Ubuntu or Debian.
-- macOS.
-- Windows with Python installed.
+Running Kali Linux inside Termux or a proot environment does not automatically provide a graphical desktop.
 
-Some networking operations, particularly raw-packet operations, may behave differently across operating systems.
+The command-line assessment may run without a GUI, while the desktop application requires a compatible graphical display.
 
----
-
-📦 Installation
-
-1. Kali Linux / Debian / Ubuntu
-
-Step 1: Install system dependencies
-
-sudo apt update
-
-sudo apt install -y \
-    python3 \
-    python3-pip \
-    python3-venv \
-    ffmpeg
-
-FFmpeg is optional if you are not using media-processing functionality.
-
-Step 2: Navigate to the project directory
-
-If the project already exists:
-
-cd /path/to/cctv-assessment
-
-Replace the example path with your actual project directory.
-
-Alternatively, create a new project directory:
-
-mkdir -p ~/CyberLab/cctv-assessment
-
-cd ~/CyberLab/cctv-assessment
-
-Step 3: Create a virtual environment
-
-python3 -m venv .venv
-
-source .venv/bin/activate
-
-Step 4: Upgrade pip
-
-python -m pip install --upgrade pip
-
-Step 5: Install dependencies
-
-python -m pip install \
-    requests \
-    PyQt6 \
-    opencv-python \
-    numpy \
-    scapy
-
-For a CLI-only installation, the following may be sufficient:
-
-python -m pip install requests
-
-Install additional packages only when the corresponding features are implemented and required.
-
-Step 6: Verify the installation
-
-python --version
-
-python -m pip list
-
-Check FFmpeg if required:
-
-ffmpeg -version
-
-2. macOS
-
-Install Python using your preferred package manager or the official Python installer.
-
-If Homebrew is installed:
-
-brew install python ffmpeg
-
-Create and activate the virtual environment:
-
-python3 -m venv .venv
-
-source .venv/bin/activate
-
-Install the dependencies:
-
-python -m pip install --upgrade pip
-
-python -m pip install \
-    requests \
-    PyQt6 \
-    opencv-python \
-    numpy \
-    scapy
-
-macOS note: Packet capture and raw-network operations can require additional permissions or platform-specific configuration. Do not assume that a script requiring elevated privileges will work identically on macOS and Linux.
-
-3. Windows
-
-Install a supported Python version and ensure Python is available in your terminal.
-
-Create a virtual environment:
-
-py -m venv .venv
-
-.\.venv\Scripts\Activate.ps1
-
-Install the dependencies:
-
-python -m pip install --upgrade pip
-
-python -m pip install `
-    requests `
-    PyQt6 `
-    opencv-python `
-    numpy `
-    scapy
-
-Verify Python:
-
-python --version
-
-Windows note: Some packet-level features may require additional drivers or operating-system configuration. Validate these requirements separately.
+A VNC desktop or another supported display environment may be necessary when running the GUI on Android.
 
 ---
 
-📁 Project Structure
+🚀 Installation
 
-A suggested project layout is:
+Step 1: Navigate to the project
 
-cctv-assessment/
-│
-├── cctv_assessment.py
-├── cctv_assessment_suite.py
-│
-├── requirements.txt
-├── README.md
-├── LICENSE
-├── .gitignore
-│
-├── src/
-│   └── cctv_assessment/
-│       ├── __init__.py
-│       ├── discovery.py
-│       ├── services.py
-│       ├── security_checks.py
-│       ├── findings.py
-│       └── reporting.py
-│
-├── reports/
-│   └── .gitkeep
-│
-├── tests/
-│   ├── test_discovery.py
-│   ├── test_security_checks.py
-│   └── test_reporting.py
-│
-└── docs/
-    ├── architecture.md
-    ├── assessment-methodology.md
-    └── security-guidelines.md
+cd ~/CyberLab/Tools/cctv_camera_tools/cctv_tools
 
-This is a recommended structure. Do not create or move files blindly if your existing project uses a different layout.
+Step 2: Create a virtual environment
 
-Recommended ".gitignore"
+python3 -m venv .venv
+source .venv/bin/activate
 
-# Python
+If virtual environment creation fails because the required Python components are missing, install the appropriate packages for your Linux distribution.
+
+On Kali Linux:
+
+apt update
+apt install -y python3-venv python3-full
+
+Then create and activate the environment again.
+
+Step 3: Upgrade pip
+
+python -m pip install --upgrade pip
+
+Step 4: Install dependencies
+
+Install the dependencies used by the current project:
+
+python -m pip install requests ipaddress
+python -m pip install PyQt6 opencv-python numpy scapy
+
+Note: "ipaddress" is part of the Python standard library in supported Python versions, so a separate installation is normally unnecessary.
+
+For video-related utilities, FFmpeg may also be useful.
+
+On Kali Linux:
+
+apt install -y ffmpeg
+
+Step 5: Verify the installation
+
+Check OpenCV:
+
+python -c "import cv2; print('OpenCV:', cv2.__version__)"
+
+Check the other principal dependencies:
+
+python -c "import PyQt6, numpy, requests, scapy; print('Dependencies OK')"
+
+Check the CLI:
+
+python cctv_assessment.py --help
+
+If these checks pass, the corresponding imports and CLI argument parser are available.
+
+This does not, by itself, establish that every assessment feature works correctly.
+
+---
+
+🖥️ Command-Line Usage
+
+Activate the virtual environment before running the application:
+
+cd ~/CyberLab/Tools/cctv_camera_tools/cctv_tools
+source .venv/bin/activate
+
+Display help
+
+python cctv_assessment.py --help
+
+Assess an individual IP address
+
+Only use a device you own or are authorized to assess.
+
+python cctv_assessment.py 192.168.1.100
+
+Use quick mode
+
+python cctv_assessment.py --quick 192.168.1.100
+
+Quick mode uses reduced timeouts. The precise checks performed and the effect on coverage depend on the implementation.
+
+Specify an output report
+
+python cctv_assessment.py \
+  192.168.1.100 \
+  --output camera_report.json
+
+Assess an authorized subnet
+
+python cctv_assessment.py \
+  192.168.1.0/24 \
+  --output office_cctv_report.json
+
+A subnet assessment can contact multiple devices. Confirm the authorized scope and account for network load before running it.
+
+Use quick mode with a subnet
+
+python cctv_assessment.py \
+  --quick \
+  192.168.1.0/24 \
+  --output quick_assessment.json
+
+Use the short options
+
+The supported short options are "-o" and "-q".
+
+python cctv_assessment.py \
+  -q \
+  192.168.1.100 \
+  -o camera_report.json
+
+Verify the generated report
+
+After an assessment, check whether the expected file exists:
+
+ls -lh camera_report.json
+
+If the output is JSON, validate its syntax:
+
+python -m json.tool camera_report.json
+
+A successful JSON parse confirms that the file is syntactically valid JSON. It does not establish the accuracy or completeness of its findings.
+
+---
+
+🖱️ Launching the Graphical Application
+
+The main graphical application is:
+
+cctv_assessment_suite.py
+
+Launch it from the project directory:
+
+cd ~/CyberLab/Tools/cctv_camera_tools/cctv_tools
+source .venv/bin/activate
+
+python cctv_assessment_suite.py
+
+Graphical environment requirements
+
+A PyQt6 application needs an appropriate Qt platform plugin and, for a visible desktop window, access to a graphical display.
+
+Check the current environment:
+
+echo "DISPLAY=${DISPLAY:-not set}"
+echo "WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-not set}"
+echo "QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-not set}"
+
+Check whether Qt can initialize:
+
+python -c "from PyQt6.QtWidgets import QApplication; import sys; app = QApplication(sys.argv); print('Qt platform:', app.platformName())"
+
+If the platform is reported as "offscreen", Qt is running without a normal visible window.
+
+The offscreen platform can be useful for automated tests, but it is not a substitute for a desktop display.
+
+If the GUI does not appear, verify the graphical environment before reinstalling Python dependencies.
+
+---
+
+📷 Camera Diagnostics and Viewing
+
+The project contains two camera-related utilities:
+
+diagnose_camera.py
+enhanced_cctv_viewer.py
+
+Inspect their available arguments before running them:
+
+python diagnose_camera.py --help
+python enhanced_cctv_viewer.py --help
+
+These scripts may not implement "--help". If either command starts an application or reports an argument error, inspect the script's entry point and documentation instead.
+
+For a source-level overview:
+
+grep -nE 'ArgumentParser|add_argument|def main|if __name__' \
+  diagnose_camera.py enhanced_cctv_viewer.py
+
+Camera access considerations
+
+- Use authorized camera addresses and credentials.
+- Do not publish credentials, private stream URLs, or authentication tokens.
+- Avoid testing camera endpoints outside your authorized scope.
+- Consider the privacy implications of storing or displaying video.
+- Verify that diagnostic requests do not interrupt normal camera operation.
+
+Stream viewing depends on the protocols, codecs, authentication methods, and runtime capabilities implemented by the application.
+
+---
+
+📊 Reports and Results
+
+The project directory contains these report files:
+
+cctv_assessment_report.html
+cctv_assessment_report.json
+cctv_report_20260528_094625.json
+office_cctv_report.html
+office_cctv_report.json
+
+These are existing project files. Their presence does not necessarily mean that a particular assessment completed successfully.
+
+JSON reports
+
+JSON is suitable for structured assessment results and subsequent processing.
+
+Inspect the top-level fields:
+
+python - <<'PY'
+import json
+from pathlib import Path
+
+for path in sorted(Path(".").glob("*.json")):
+    try:
+        with path.open(encoding="utf-8") as f:
+            data = json.load(f)
+
+        print(f"\n{path}")
+
+        if isinstance(data, dict):
+            print("Keys:", ", ".join(data.keys()))
+        elif isinstance(data, list):
+            print("Entries:", len(data))
+        else:
+            print("Data type:", type(data).__name__)
+
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"{path}: {exc}")
+PY
+
+HTML reports
+
+HTML reports are suitable for human-readable assessment summaries.
+
+On a desktop environment, open a report in your preferred browser.
+
+For example:
+
+xdg-open cctv_assessment_report.html
+
+This requires a compatible graphical desktop and an available browser.
+
+Reporting best practices
+
+A useful security assessment report should distinguish:
+
+- Observed facts.
+- Potential vulnerabilities.
+- Confirmed vulnerabilities.
+- Evidence and limitations.
+- Severity and potential impact.
+- Recommended remediation.
+- Verification status.
+
+Do not treat a detected open port, an HTTP response, or a camera banner as proof that a device is vulnerable.
+
+---
+
+🔍 Assessment Workflow
+
+A responsible CCTV security assessment can follow these stages.
+
+Stage 1: Define the scope
+
+Document the authorized network ranges, device owners, testing window, and any prohibited actions.
+
+Stage 2: Inventory devices
+
+Use the assessment CLI to investigate the approved targets.
+
+Record relevant device identifiers and observed services where supported by the implementation.
+
+Stage 3: Review findings
+
+Inspect the generated reports and validate significant findings.
+
+Separate verified issues from indicators that require further investigation.
+
+Stage 4: Validate critical findings
+
+Perform additional manual verification only when authorized.
+
+Prefer non-disruptive checks and avoid unnecessary access to live video or sensitive information.
+
+Stage 5: Remediate
+
+Depending on the verified issue, appropriate actions may include:
+
+- Updating camera firmware.
+- Changing default or weak credentials.
+- Restricting administrative interfaces.
+- Segmenting CCTV devices from user networks.
+- Limiting access to camera management services.
+- Disabling unnecessary services.
+- Restricting camera streams to authorized clients.
+- Reviewing logging and access controls.
+
+Stage 6: Retest
+
+Repeat the relevant checks after remediation and document whether the issue has been resolved.
+
+---
+
+🛠️ Troubleshooting
+
+"ModuleNotFoundError: No module named 'cv2'"
+
+Activate the project's virtual environment:
+
+source .venv/bin/activate
+
+Install OpenCV inside that environment:
+
+python -m pip install opencv-python
+
+Verify:
+
+python -c "import cv2; print(cv2.__version__)"
+
+"ModuleNotFoundError: No module named 'PyQt6'"
+
+source .venv/bin/activate
+python -m pip install PyQt6
+
+Qt reports "propagateSizeHints()"
+
+A message such as:
+
+This plugin does not support propagateSizeHints()
+
+can be a platform-plugin warning rather than a fatal exception.
+
+Check whether the application remains responsive and whether a window is visible. Investigate the display configuration if it does not appear.
+
+Qt reports "offscreen"
+
+Check:
+
+echo "$QT_QPA_PLATFORM"
+echo "$DISPLAY"
+echo "$WAYLAND_DISPLAY"
+
+If "QT_QPA_PLATFORM" is explicitly set to "offscreen", and you have a functioning graphical desktop, try:
+
+unset QT_QPA_PLATFORM
+python cctv_assessment_suite.py
+
+Only do this when a compatible display is available. Unsetting the variable cannot create a graphical desktop that does not exist.
+
+The GUI is unavailable on Android
+
+A Linux terminal alone does not guarantee graphical application support.
+
+Configure a compatible desktop environment, such as a VNC desktop, before attempting to run the PyQt6 interface.
+
+The CLI can be used independently where its networking and Python requirements are satisfied.
+
+Report output is missing
+
+Check the command's exit status and output:
+
+echo $?
+
+Then verify the specified path:
+
+ls -lh camera_report.json
+
+Use the actual filename supplied to "--output".
+
+Python package installation fails
+
+Ensure the virtual environment is active:
+
+source .venv/bin/activate
+python -m pip --version
+
+Avoid forcing package installations into Kali's system-managed Python environment.
+
+---
+
+🔐 Security and Responsible Use
+
+This toolkit is intended for legitimate security assessment, defensive research, and authorized testing.
+
+Users are responsible for complying with applicable laws, organizational policies, privacy requirements, and contractual restrictions.
+
+Do not use the toolkit to:
+
+- Access cameras without authorization.
+- Obtain or expose private video feeds.
+- Capture credentials or sensitive traffic belonging to others.
+- Disrupt CCTV operations or interfere with safety systems.
+- Evade access controls or conceal unauthorized activity.
+- Scan networks outside the approved scope.
+
+Traffic-related functionality should only be used in an explicitly authorized environment with appropriate safeguards.
+
+Protect assessment reports because they may contain sensitive device information, network addresses, and security weaknesses.
+
+---
+
+🧪 Development and Verification
+
+Before releasing changes, verify the environment and available commands.
+
+Check the CLI
+
+python cctv_assessment.py --help
+
+Check imports
+
+python -c "import cv2, numpy, requests, scapy; print('Core dependencies OK')"
+
+python -c "import PyQt6; print('PyQt6 OK')"
+
+Check report syntax
+
+python -m json.tool cctv_assessment_report.json > /dev/null
+
+Repeat this check using the actual report generated during testing.
+
+Check the Git working tree
+
+git status --short
+
+Keep generated reports, credentials, local configuration, and virtual environments out of version control when they contain sensitive information or unnecessary local artifacts.
+
+A ".gitignore" file can include entries such as:
+
+.venv/
 __pycache__/
 *.py[cod]
-*.pyd
-*.egg-info/
-dist/
-build/
-
-# Virtual environments
-.venv/
-venv/
-env/
-
-# Environment variables and credentials
 .env
 .env.*
 !.env.example
 
-# Test and coverage output
-.pytest_cache/
-.coverage
-htmlcov/
-
-# IDE configuration
-.vscode/
-.idea/
-
-# Generated reports
-reports/*.json
-reports/*.html
-
-# Logs
-*.log
-
-# Operating system files
-.DS_Store
-Thumbs.db
-
-Generated reports may contain sensitive network information. Review them before sharing or committing them to a repository.
-
----
-
-🚀 Command-Line Usage
-
-The following commands illustrate the intended CLI interface. They assume "cctv_assessment.py" supports the specified arguments.
-
-1. Assess a Single Device
-
-python3 cctv_assessment.py 192.168.1.100
-
-This example targets a single device on a private network.
-
-Replace the address with the IP address of a CCTV device you are authorized to assess.
-
-2. Assess an Authorized Subnet
-
-python3 cctv_assessment.py 192.168.1.0/24
-
-A "/24" IPv4 subnet contains 256 addresses, including the network and broadcast addresses. The number of usable device addresses depends on the network configuration.
-
-Operational recommendation: Start with a small, explicitly authorized range. Avoid running broad scans against production networks without approval and an agreed testing window.
-
-3. Export a JSON Report
-
-python3 cctv_assessment.py \
-    192.168.1.0/24 \
-    --output office_cctv_report.json
-
-This command assumes that the script implements the "--output" option and JSON export.
-
-4. Map a Dedicated CCTV Network
-
-For an authorized laboratory network:
-
-python3 cctv_assessment.py \
-    10.0.0.0/24 \
-    --output initial_map.json
-
-Use this only if "10.0.0.0/24" is actually assigned to your test environment.
-
-5. Review the Results
-
-After the assessment completes:
-
-1. Confirm that the report was generated.
-2. Check which devices were identified.
-3. Review the evidence for each finding.
-4. Distinguish confirmed vulnerabilities from unverified indicators.
-5. Document remediation recommendations.
-6. Provide the report to the responsible network or security team.
-
-6. View CLI Help
-
-If implemented:
-
-python3 cctv_assessment.py --help
-
-If this command fails, inspect the argument parser in the script before assuming the documented options are supported.
-
----
-
-🖥️ Graphical Application
-
-The desktop interface is intended to provide a more accessible way to review CCTV assessment results.
-
-Launch the Application
-
-Activate the virtual environment:
-
-source .venv/bin/activate
-
-Launch the GUI:
-
-python3 cctv_assessment_suite.py
-
-On Windows PowerShell:
-
-.\.venv\Scripts\Activate.ps1
-
-python cctv_assessment_suite.py
-
-Suggested Interface Sections
-
-A mature desktop application could include the following views.
-
-Dashboard
-
-Display summary information such as:
-
-- Total discovered devices.
-- Devices successfully assessed.
-- Devices with outstanding review items.
-- Findings by severity.
-- Most recent assessment.
-- Assessment completion status.
-
-Device Inventory
-
-Show available information for each device:
-
-- IP address.
-- Hostname.
-- Manufacturer or model, when reliably identified.
-- Observed network services.
-- Last assessment time.
-- Assessment status.
-
-Unknown attributes should remain unknown rather than being guessed.
-
-Security Findings
-
-Present findings with:
-
-- Finding title.
-- Affected device.
-- Severity.
-- Evidence.
-- Confidence.
-- Potential impact.
-- Recommended remediation.
-- Verification status.
-
-Reports
-
-Allow users to review and export reports without accidentally exposing credentials, stream URLs, or other sensitive information.
-
-Camera Viewer
-
-Where implemented, provide authorized RTSP stream viewing with explicit user selection, secure credential handling, and controlled connection timeouts.
-
----
-
-🔬 Assessment Workflow
-
-A repeatable assessment process improves the reliability and usefulness of security findings.
-
-Phase 1: Authorization and Scope
-
-Before scanning:
-
-- Obtain permission from the network owner.
-- Identify the approved IP ranges.
-- Define permitted assessment techniques.
-- Agree on testing windows.
-- Identify critical devices that must not be disrupted.
-- Establish how results will be stored and shared.
-
-Document the scope before running the assessment.
-
-Phase 2: Network Discovery
-
-Identify devices within the approved network range.
-
-Record:
-
-- IP address.
-- Hostname, when available.
-- Discovery method.
-- Timestamp.
-- Whether the device responded.
-
-A device that does not respond to a discovery probe is not necessarily offline. Firewalls and device configurations may block the selected probes.
-
-Phase 3: Service Identification
-
-Review relevant services exposed by identified devices.
-
-Depending on the implementation and authorization, common CCTV-related services may include:
-
-Service| Typical port| Purpose
-HTTP| TCP 80| Web management
-HTTPS| TCP 443| Encrypted web management
-RTSP| TCP 554| Real-time streaming control
-SSH| TCP 22| Administrative access on supported devices
-Telnet| TCP 23| Legacy remote administration
-
-These are conventional port assignments, not proof that a particular service is running. Services may use nonstandard ports.
-
-Phase 4: Security Configuration Review
-
-Where reliable evidence is available, evaluate:
-
-- Whether management services are unnecessarily exposed.
-- Whether HTTPS is configured appropriately.
-- Whether firmware is supported and up to date.
-- Whether unnecessary remote administration is enabled.
-- Whether device management is restricted to trusted networks.
-- Whether authentication is appropriately configured.
-- Whether the camera network is isolated from user networks.
-
-Phase 5: Validate Findings
-
-Before reporting a vulnerability:
-
-1. Review the collected evidence.
-2. Confirm that the finding applies to the affected device.
-3. Check for false positives.
-4. Identify any limitations in the assessment.
-5. Use authorized manual verification when necessary.
-
-Do not treat an open port, an HTTP response, or a device banner as proof of a vulnerability by itself.
-
-Phase 6: Reporting and Remediation
-
-Document each finding and assign an appropriate priority.
-
-For every finding, include:
-
-- Affected asset.
-- Description.
-- Evidence.
-- Potential impact.
-- Severity and confidence.
-- Remediation.
-- Verification status.
-
-Retest after remediation to confirm that the issue has been resolved.
-
----
-
-🔐 Security Checks
-
-The assessment engine should distinguish between confirmed weaknesses, potential weaknesses, and informational observations.
-
-Check| Example evidence| Recommended response
-Unnecessary exposed service| A service responds on a port that should not be externally accessible.| Restrict access or disable the service if unnecessary.
-Unencrypted management interface| A management endpoint accepts HTTP connections.| Prefer HTTPS and restrict management access.
-Unsupported firmware| Vendor documentation confirms that the installed version is no longer supported.| Plan a supported firmware upgrade or replacement.
-Weak network isolation| CCTV devices can reach unrelated user or server networks without a business requirement.| Apply network segmentation and restrictive access rules.
-Insecure remote administration| Administrative access is available from untrusted network segments.| Restrict access to approved management hosts or VPNs.
-Inadequate logging| Security-relevant administrative events are not being recorded where required.| Enable available logging and centralized monitoring.
-Unverified device identity| A device cannot be confidently identified from available evidence.| Confirm its identity through authorized inventory or administrative records.
-
-Severity Guidelines
-
-A consistent severity model helps prioritize remediation.
-
-- Critical: A confirmed issue presents an immediate, severe risk to the organization.
-- High: A confirmed weakness could enable substantial unauthorized access or compromise.
-- Medium: A meaningful security weakness exists but has limited impact or requires additional conditions.
-- Low: A limited weakness or hardening opportunity is identified.
-- Informational: An observation is useful for inventory or security review but is not itself a vulnerability.
-
-Severity must be based on evidence, impact, exposure, and realistic attack conditions. It should not be assigned solely because a particular port is open.
-
----
-
-📊 Reports and Findings
-
-The suite is intended to support JSON and HTML reporting.
-
-JSON Report
-
-Example of a possible report structure:
-
-{
-  "assessment": {
-    "name": "CCTV Network Security Assessment",
-    "status": "example",
-    "scope": [
-      "192.168.1.0/24"
-    ],
-    "timestamp": "REPLACE_WITH_ASSESSMENT_TIMESTAMP"
-  },
-  "summary": {
-    "devices_discovered": 0,
-    "devices_assessed": 0,
-    "findings_total": 0
-  },
-  "devices": [],
-  "findings": [],
-  "limitations": [
-    "Example structure only; no assessment has been performed."
-  ]
-}
-
-This is an illustrative schema, not a report generated by the application.
-
-HTML Report
-
-A useful HTML report should contain:
-
-1. Assessment summary.
-2. Scope and methodology.
-3. Device inventory.
-4. Findings grouped by severity.
-5. Supporting evidence.
-6. Remediation recommendations.
-7. Assessment limitations.
-8. Assessment timestamp.
-
-Reports should be self-contained where practical and should avoid including passwords, session cookies, authentication tokens, or unnecessary video footage.
-
-Evidence Quality
-
-A good finding should answer three questions:
-
-What was observed?
-
-Describe the specific behavior or configuration.
-
-Why does it matter?
-
-Explain the security implications without exaggerating the impact.
-
-What should be done?
-
-Provide a specific remediation step that the device owner can implement.
-
----
-
-🎥 RTSP Stream Assessment
-
-RTSP is commonly used to control real-time audio and video streaming.
-
-Some CCTV systems expose RTSP services on TCP port 554, although implementations and configurations vary.
-
-Requirements
-
-RTSP-related functionality may require:
-
-- An authorized camera.
-- A valid stream URL.
-- Appropriate authentication.
-- Network connectivity.
-- FFmpeg or a compatible media backend.
-- OpenCV support, depending on the implementation.
-
-Check FFmpeg
-
-ffmpeg -version
-
-RTSP Security Considerations
-
-When assessing an RTSP deployment:
-
-- Confirm that streaming access is restricted to authorized users.
-- Avoid exposing streams directly to untrusted networks.
-- Use supported authentication and encryption mechanisms where available.
-- Protect credentials in configuration and application logs.
-- Avoid saving video unless it is necessary and explicitly authorized.
-- Close streams and release media resources when the session ends.
-
-An RTSP service being reachable does not automatically mean that a camera is vulnerable.
-
-Note: The commands in this README do not establish that RTSP viewing or stream assessment has already been implemented in the application.
-
----
-
-🛡️ Security Recommendations
-
-1. Change Default Credentials
-
-Replace vendor-default credentials with unique, strong passwords.
-
-Where supported, use individual administrator accounts and multi-factor authentication.
-
-2. Update Firmware
-
-Maintain an inventory of camera models and firmware versions.
-
-Apply vendor security updates according to an established change-management process.
-
-3. Segment CCTV Networks
-
-Place CCTV devices on a dedicated VLAN or isolated network where practical.
-
-Restrict traffic between cameras, administrative workstations, recording servers, and other internal systems.
-
-4. Restrict Management Access
-
-Limit camera administration to approved hosts, networks, or VPN connections.
-
-Disable unnecessary remote-management services.
-
-5. Secure Remote Access
-
-Avoid exposing camera management interfaces directly to the public Internet.
-
-Use an appropriately secured remote-access architecture.
-
-6. Protect Streaming Traffic
-
-Where supported, use secure streaming options and restrict access to authorized clients.
-
-Evaluate the security capabilities of the camera and recorder before selecting a deployment design.
-
-7. Monitor Important Events
-
-Where supported, collect logs for:
-
-- Administrative logins.
-- Failed authentication attempts.
-- Configuration changes.
-- Firmware updates.
-- Unexpected device reboots.
-- Changes to network configuration.
-
-8. Maintain an Asset Inventory
-
-Record:
-
-- Device owner.
-- Physical location.
-- IP address.
-- Manufacturer and model.
-- Firmware version.
-- Network segment.
-- Support status.
-- Last review date.
-
-An accurate inventory makes patch management and incident response more effective.
-
----
-
-🧰 Troubleshooting
-
-Problem: "ModuleNotFoundError"
-
-Example:
-
-ModuleNotFoundError: No module named 'requests'
-
-Solution:
-
-Activate the correct virtual environment and install the missing dependency.
-
-source .venv/bin/activate
-
-python -m pip install requests
-
-Verify the Python interpreter:
-
-which python
-python -m pip show requests
-
-On Windows, use:
-
-where.exe python
-python -m pip show requests
-
-Problem: "ipaddress" Cannot Be Imported
-
-The module is included in Python's standard library.
-
-Check the Python version:
-
-python3 --version
-
-Check for a local file named "ipaddress.py" that might shadow the standard-library module.
-
-Problem: PyQt6 Cannot Start
-
-Example:
-
-ImportError: ...
-
-Solution:
-
-python -m pip install --upgrade PyQt6
-
-Check that the application is running in a compatible graphical environment.
-
-Headless Linux environments may require a virtual display or a different testing strategy.
-
-Problem: OpenCV Cannot Open an RTSP Stream
-
-Possible causes include:
-
-- Incorrect stream URL.
-- Invalid credentials.
-- Firewall restrictions.
-- Unsupported camera stream format.
-- Missing media backend support.
-- Camera-side connection limits.
-
-Confirm connectivity and stream details using an authorized test camera before debugging the application.
-
-Problem: No Devices Are Discovered
-
-Possible causes include:
-
-- Incorrect IP range.
-- Routing restrictions.
-- Host firewalls.
-- VLAN isolation.
-- Device discovery probes being blocked.
-- Network interface selection issues.
-- Inappropriate permissions for the chosen discovery method.
-
-Confirm the target address and network scope before changing permissions or increasing scan intensity.
-
-Problem: "PermissionError" During Packet Operations
-
-Some packet-level operations require elevated privileges or platform-specific configuration.
-
-Do not run the entire application as root merely to suppress an error. Identify the specific operation requiring elevated privileges and grant only the permissions needed for that feature.
-
-Problem: "--output" Is Not Recognized
-
-Example:
-
-error: unrecognized arguments: --output
-
-The script may not implement the documented output option.
-
-Check:
-
-python3 cctv_assessment.py --help
-
-Then inspect the command-line argument parser and reporting implementation.
-
-Problem: The GUI Opens but Scanning Does Not Work
-
-Possible causes include:
-
-- The GUI is not connected to the assessment engine.
-- The background worker is not started correctly.
-- An exception occurs during discovery.
-- A network operation blocks the GUI thread.
-- The assessment engine expects different arguments.
-
-Check the application logs and ensure long-running operations are handled outside the main GUI thread.
-
----
-
-🧪 Development and Testing
-
-Activate the Development Environment
-
-source .venv/bin/activate
-
-Install Development Dependencies
-
-If you add automated tests:
-
-python -m pip install pytest
-
-Run Tests
-
-python -m pytest -q
-
-This command requires a test suite to exist.
-
-Recommended Test Coverage
-
-Test the following components independently:
-
-- IPv4 address parsing.
-- CIDR validation.
-- Out-of-scope target rejection.
-- Device inventory handling.
-- Service classification.
-- Finding severity assignment.
-- JSON report serialization.
-- HTML report escaping.
-- Connection timeouts.
-- Error handling.
-- GUI responsiveness.
-- Cleanup of network and media resources.
-
-Safe Test Environment
-
-Use a dedicated virtual lab or isolated network containing devices you own.
-
-Mock network responses for unit tests so that ordinary development does not require scanning real devices.
-
-Avoid tests that depend on Internet-exposed cameras or other third-party infrastructure.
+Add report-file exclusions only if the repository's intended workflow does not require those reports to be tracked.
 
 ---
 
 🗺️ Roadmap
 
-The following roadmap identifies possible future development work. It is not a claim that these features are already available.
+Potential future improvements include:
 
-Phase 1 — Core Assessment Engine
+- More consistent device inventory and report schemas.
+- Better assessment progress and error reporting.
+- Additional automated tests for report generation.
+- Clearer separation between CLI and GUI dependencies.
+- Improved graphical display compatibility.
+- Better evidence collection and remediation tracking.
+- Exportable, privacy-conscious assessment summaries.
+- Documentation of supported camera protocols and tested environments.
+- Reproducible dependency management.
 
-- [ ] Validate IP addresses and CIDR ranges.
-- [ ] Add configurable assessment scope.
-- [ ] Implement bounded network discovery.
-- [ ] Add configurable timeouts and request limits.
-- [ ] Normalize device inventory data.
-- [ ] Implement structured JSON reporting.
-- [ ] Add automated unit tests.
-
-Phase 2 — Security Intelligence
-
-- [ ] Improve service identification.
-- [ ] Add evidence-backed configuration checks.
-- [ ] Introduce finding confidence levels.
-- [ ] Add severity and remediation guidance.
-- [ ] Distinguish confirmed vulnerabilities from potential risks.
-- [ ] Improve false-positive handling.
-
-Phase 3 — Desktop Interface
-
-- [ ] Build a responsive PyQt6 dashboard.
-- [ ] Add device inventory views.
-- [ ] Add findings filters and search.
-- [ ] Add assessment progress and cancellation.
-- [ ] Implement report export.
-- [ ] Improve error messages and logging.
-
-Phase 4 — Reporting and Auditability
-
-- [ ] Add HTML report generation.
-- [ ] Add assessment timestamps and scope information.
-- [ ] Record methodology and limitations.
-- [ ] Support finding verification status.
-- [ ] Add report redaction options.
-- [ ] Support assessment comparisons.
-
-Phase 5 — Defensive Monitoring
-
-- [ ] Support authorized asset inventory imports.
-- [ ] Track firmware review status.
-- [ ] Add configuration-baseline comparisons.
-- [ ] Provide network segmentation review guidance.
-- [ ] Add optional monitoring integrations.
-- [ ] Improve audit trails.
-
-Phase 6 — Quality and Release
-
-- [ ] Add continuous integration.
-- [ ] Test supported operating systems.
-- [ ] Publish dependency requirements.
-- [ ] Document installation and release procedures.
-- [ ] Add reproducible builds where applicable.
-- [ ] Publish verified screenshots and demonstrations.
-
----
-
-⚖️ Responsible Use
-
-This project is intended for legitimate cybersecurity assessment, education, and defensive security work.
-
-Authorized Use
-
-Use the suite only:
-
-- On devices you own.
-- On networks you administer.
-- With explicit permission from the network owner.
-- Within the scope and conditions of an approved assessment.
-
-Prohibited Use
-
-Do not use this software to:
-
-- Access cameras without authorization.
-- Obtain or misuse other people's credentials.
-- View, record, or distribute private camera footage without permission.
-- Circumvent access controls.
-- Disrupt camera availability.
-- Scan networks outside the approved scope.
-- Exploit devices belonging to third parties.
-
-Assessment Limitations
-
-Network discovery and service checks cannot guarantee that a device is secure.
-
-Results may be affected by:
-
-- Firewalls.
-- Network segmentation.
-- Device-specific behavior.
-- Firmware differences.
-- Incomplete service identification.
-- Unavailable administrative information.
-- False positives and false negatives.
-
-A clean report does not establish that a CCTV system is free from vulnerabilities.
-
-Data Protection
-
-Assessment reports can contain sensitive infrastructure details.
-
-Store reports securely, limit access to authorized personnel, redact unnecessary information before sharing, and follow applicable organizational policies and local laws.
-
-The user is responsible for obtaining authorization and ensuring compliance with relevant legal and contractual obligations.
-
----
-
-🤝 Contributing
-
-Contributions that improve security, reliability, usability, and documentation are welcome.
-
-Suggested Contribution Process
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Make a focused change.
-4. Add tests where appropriate.
-5. Run the test suite.
-6. Update the documentation.
-7. Submit a pull request explaining the change.
-
-Contribution Priorities
-
-- Reliable network parsing.
-- Safe handling of assessment scope.
-- Accurate security findings.
-- Better error handling.
-- Secure report generation.
-- Cross-platform compatibility.
-- Accessible GUI design.
-- Clear installation instructions.
-- Automated tests.
-
-Contributions should not introduce unauthorized camera access, credential theft, stealth features, or destructive behavior.
+These are proposed improvements, not claims that the features are already implemented.
 
 ---
 
 📄 License
 
-This project is intended to use the MIT License.
+Confirm the project's actual license before distributing or modifying it.
 
-Before distributing the project, ensure that a "LICENSE" file containing the actual MIT License text is present in the repository.
+If the repository uses the MIT License, include the corresponding "LICENSE" file and update the badge accordingly.
 
-The license statement in this README does not itself grant rights that have not been established by the project's actual licensing files.
-
----
-
-👨‍💻 Author
-
-Alex Ladwong
-
-Cybersecurity Engineering · Computer Networking · Secure Software Development · DevSecOps
-
-The CCTV Security Assessment Suite is a cybersecurity development project focused on strengthening CCTV security assessment, network visibility, and defensive security practices.
-
-Professional Links
-
-- Portfolio: "Ladwong Developers" (https://www.ladwongdevelopers.dev/)
-- LinkedIn: "Alex Ladwong on LinkedIn" (https://www.linkedin.com/in/ap-kintu-alex-ladwong-omega1984/)
-- Cybersecurity Lab: "CF-LSH Security Platform" (https://sec-nerves.vercel.app/)
+Do not claim a specific license until it has been verified.
 
 ---
 
-⭐ Support the Project
+🤝 Contributing
 
-If this project supports your cybersecurity learning, research, or defensive security work, consider starring the repository, reporting bugs, contributing improvements, or sharing feedback.
+Contributions that improve reliability, maintainability, documentation, usability, and defensive security are welcome.
 
-Security tools become more useful when their findings are accurate, their limitations are clearly documented, and their users apply them responsibly.
+Before submitting a change:
 
-Discover. Assess. Document. Remediate. Secure.
+1. Explain the problem or improvement.
+2. Keep changes focused.
+3. Test the affected functionality.
+4. Document new dependencies and configuration.
+5. Avoid committing credentials or sensitive assessment data.
+6. Include appropriate tests where practical.
+
+---
+
+📚 Documentation
+
+Start with the command-line help:
+
+python cctv_assessment.py --help
+
+Review the Python source code and existing report files for implementation-specific details.
+
+Documented capabilities should be verified against the current source and tested behavior.
+
+---
+
+<p align="center">
+  <strong>CCTV Security Assessment Suite</strong><br>
+  Authorized Testing · Defensive Security · Responsible Disclosure
+</p>
